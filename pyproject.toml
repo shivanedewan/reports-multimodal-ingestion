@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reports-multimodal-ingestion"
+version = "0.1.0"
+description = "Resumable Elasticsearch multimodal ingestion using two vLLM pooling servers"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.28,<0.29", "tokenizers>=0.21,<0.24", "Pillow>=11,<13",
+  "pypdf>=6,<7", "python-docx>=1.2,<2", "openpyxl>=3.1,<4",
+  "beautifulsoup4>=4.13,<5", "charset-normalizer>=3.4,<4"
+]
+
+[project.optional-dependencies]
+pdf = ["PyMuPDF>=1.26,<2"]
+archives = ["rarfile>=4,<5"]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+reports-ingest = "reports_ingest.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["reports_ingest*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
